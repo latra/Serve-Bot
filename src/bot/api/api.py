@@ -13,6 +13,7 @@ class BotApi:
             body_json = request.json
             channel = self.client.get_channel(body_json['channel_uid'])
             await channel.send('test')
+            return "all ok!"
     def start(self):
         print("STARTING!")
         self.app.run(host="0.0.0.0", port='4030')
