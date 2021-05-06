@@ -16,6 +16,10 @@ from discord.ext import tasks
 lang_string = json.load(open(os.path.join(os.path.dirname(os.path.realpath('__file__')), 'src/bot/strings/ES-es.json')))
         
 class BotApi: 
+    @tasks.loop(seconds=60) # task runs every 60 seconds
+    async def slow_count(self):
+        import time
+        print("HOLA HOLA HOLA HOLA")
     def __init__(self):
 
         self.app = Flask(__name__)
@@ -29,10 +33,7 @@ class BotApi:
         self.client = discord_commands.Bot(command_prefix="")
         self.token = os.getenv('DISCORD_TOKEN')
 
-        @tasks.loop(seconds=60) # task runs every 60 seconds
-        async def slow_count(self):
-            import time
-            print("HOLA HOLA HOLA HOLA")
+
 
         @self.client.event
         async def on_ready():
