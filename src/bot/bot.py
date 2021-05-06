@@ -24,7 +24,7 @@ class DiscordBot:
         self.token = os.getenv('DISCORD_TOKEN')
         self.index = 0
         self.client.remove_command('help')
-        self.client.add_command(command)
+        self.client.add_command(help)
         logging.info("Reading bot functions")
         @self.client.command()
         async def help(ctx):
