@@ -39,9 +39,9 @@ class BotApi:
         else:
             message = lang_string[BOT_ERROR]
 
-        channel = client.get_channel(channel_uid)
+        channel = self.client.get_channel(channel_uid)
         asyncio.run(channel.send(message))
-        
+
 if __name__ == "__main__":
     logging.basicConfig(level=logging.DEBUG)
     logging.debug("Reading env configuration")
