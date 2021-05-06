@@ -47,16 +47,15 @@ class DiscordBot:
         flask_app = BotApi(self.client)
         logging.info("Bot setup completed")
 
-        thread = Process(target=self.test, args=(None,))
+        thread = Process(target=flask_app.start, args=(None,))
         logging.info("Bot setup completed 2")
 
         thread.start()
         logging.info("Bot setup completed")
 
-    def test(self):
-        print("THREAD WORKING")
-        import time
-        time.sleep(15)
+    def start(self):
+        logging.info("Starting bot!")
+        self.client.run(self.token)
 if __name__ == "__main__":
     logging.basicConfig(level=logging.DEBUG)
     logging.debug("Reading env configuration")
