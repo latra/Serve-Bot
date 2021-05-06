@@ -17,15 +17,13 @@ class BotApi:
         @self.app.route('/game', methods = ['POST'])
         def gameServer():
             body_json = request.json
-            self.game_response(body_json)
+            asyncio.run(self.game_response(body_json))
             print(request)
 
             return 'OK'
     def game_response(self, body_json):
-        self.treatment(body_json['server_uid'], body_json['channel_uid'], body_json['game'], body_json['status'], body_json['ip'], body_json['port'])
+        await self.treatment(body_json['server_uid'], body_json['channel_uid'], body_json['game'], body_json['status'], body_json['ip'], body_json['port'])
     def treatment(self, server_uid, channel_uid, game, status, ip, port):
-        loop = asyncio.get_event_loop()
-        asyncio.set_event_loop(loop)
 
         client = discord_commands.Bot(command_prefix=os.getenv('DISCORD_PREFIX'))
         @client.event
@@ -37,7 +35,9 @@ class BotApi:
             await channel.send('test')
             exit()
         print("Aqui llega!!!!!!!!")
-        client.start(self.token)
+        nest_asyncio.apply()
+        loop = asyncio.get_event_loop()
+        loop.run_until_complete(client.start(self.token))
     def start(self):
         
         print("STARTING!")
