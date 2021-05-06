@@ -9,45 +9,61 @@ from discord.ext import commands as discord_commands
 import nest_asyncio
 import logging
 from dotenv import load_dotenv
-import sys, os
+import sys, os, threading
 import json
-
+from discord.ext import tasks
 
 lang_string = json.load(open(os.path.join(os.path.dirname(os.path.realpath('__file__')), 'src/bot/strings/ES-es.json')))
         
 class BotApi: 
+    @tasks.loop(seconds=1) # task runs every 60 seconds
+    async def slow_count(self):
+        import time
+        answer = None
+        self.lock.acquire()
+        if len(self.answers) > 0:
+            answer = self.answers.pop()
+        self.lock.release()
+        if answer:
+            await self.treatment(answer['server_uid'], answer['channel_uid'], answer['game'], answer['status'], answer['ip'], answer['port'], answer['password'])
+        
+        print("HOLA HOLA HOLA HOLA")
     def __init__(self):
+        self.lock = threading.Lock()
+        self.answers = []
         self.app = Flask(__name__)
         self.api = Api(self.app)
-        self.token = os.getenv('DISCORD_TOKEN')
         @self.app.route('/game', methods = ['POST'])
         def gameServer():
             body_json = request.json
-            self.game_response(body_json)
-            print(request)
+
+            self.lock.acquire()
+            self.answers.append(body_json)
+            self.lock.acquire()
             return '200 OK'
-    def game_response(self, body_json):
-         self.treatment(body_json['server_uid'], body_json['channel_uid'], body_json['game'], body_json['status'], body_json['ip'], body_json['port'], body_json['password'])
-    def treatment(self, server_uid, channel_uid, game, status, ip, port, password):
-        asyncio.set_event_loop(asyncio.new_event_loop())
 
-        client = discord_commands.Bot(command_prefix="")
-        @client.event
+        self.client = discord_commands.Bot(command_prefix="")
+        self.token = os.getenv('DISCORD_TOKEN')
+
+
+
+        @self.client.event
         async def on_ready():
-            if status == 200:
-                message = lang_string[TERRARIA_READY].format(IP=ip, PORT=port, PASSWORD=password)
-            else:
-                message = lang_string[BOT_ERROR]
-
-            channel = client.get_channel(channel_uid)
-            await channel.send(message)
-            await client.close()
-        loop = asyncio.get_event_loop()
-        loop.run_until_complete(client.start(self.token))
+            self.slow_count.start()
+            self.app.run(host="0.0.0.0", port='4030')
 
 
-    def start(self):
-        self.app.run(host="0.0.0.0", port='4030')
+
+        self.client.run(self.token)
+
+    async def treatment(self, server_uid, channel_uid, game, status, ip, port, password):
+        if status == 200:
+            message = lang_string[TERRARIA_READY].format(IP=ip, PORT=port, PASSWORD=password)
+        else:
+            message = lang_string[BOT_ERROR]
+
+        channel = self.client.get_channel(channel_uid)
+        await channel.send(message)
 
 if __name__ == "__main__":
     logging.basicConfig(level=logging.DEBUG)
