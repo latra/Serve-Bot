@@ -29,10 +29,10 @@ class BotApi:
         self.client = discord_commands.Bot(command_prefix="")
         self.token = os.getenv('DISCORD_TOKEN')
 
-        
+
         @self.client.event
         async def on_ready():
-            slow_count().start()
+            self.client.loop.create_task(slow_count())
             self.app.run(host="0.0.0.0", port='4030')
 
 
