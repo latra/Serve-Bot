@@ -34,7 +34,7 @@ class DiscordBot:
             pass
         @self.client.event
         async def on_message(message):
-            await client.process_commands(message)
+            await self.client.process_commands(message)
         # @self.client.event
         # async def on_command_error(ctx, error):
         #     value = ''.join(traceback.format_exception(None, error, error.__traceback__))
