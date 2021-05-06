@@ -7,7 +7,7 @@ from discord.ext import commands as discord_commands
 import nest_asyncio
 import logging
 from dotenv import load_dotenv
-import sys
+import sys, os
         
 class BotApi: 
     def __init__(self):
