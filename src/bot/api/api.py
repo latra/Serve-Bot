@@ -31,10 +31,8 @@ class BotApi:
             channel = client.get_channel(channel_uid)
             await channel.send('test')
             exit()
-        nest_asyncio.apply()
-        loop = asyncio.get_event_loop()
         print("Aqui llega!!!!!!!!")
-        loop.run_until_complete(client.start(self.token))
+        client.run(self.token)
 
     def start(self):
         
