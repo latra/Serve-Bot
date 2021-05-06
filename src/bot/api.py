@@ -26,7 +26,7 @@ class BotApi:
     def treatment(self, server_uid, channel_uid, game, status, ip, port):
         asyncio.set_event_loop(asyncio.new_event_loop())
 
-        client = discord_commands.Bot(command_prefix=os.getenv('DISCORD_PREFIX'))
+        client = discord_commands.Bot(command_prefix="")
         @client.event
         async def on_ready():
             print("Aqui sigue!!!!!!!!")
