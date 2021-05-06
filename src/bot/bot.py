@@ -32,7 +32,7 @@ class DiscordBot:
         @self.client.command()
         async def stop(ctx):
             pass
-        @client.event
+        @self.client.event
         async def on_message(message):
             await client.process_commands(message)
         # @self.client.event
