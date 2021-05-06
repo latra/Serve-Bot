@@ -3,7 +3,7 @@ from flask_restful import Resource, Api
 from json import dumps
 from flask import request
 import asyncio
-from threading import Thread
+
         
 class BotApi: 
     def __init__(self, client, token):
@@ -28,8 +28,8 @@ class BotApi:
             await channel.send('test')
             exit()
         loop = asyncio.get_event_loop()
-        loop.create_task(self.client.start(self.token))
-        Thread(target=loop.run_forever())
+        loop.run_until_complete(await self.client.start(self.token))
+
     def start(self):
         
         print("STARTING!")
