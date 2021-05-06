@@ -29,16 +29,17 @@ class BotApi:
         self.client = discord_commands.Bot(command_prefix="")
         self.token = os.getenv('DISCORD_TOKEN')
 
+        @tasks.loop(seconds=60) # task runs every 60 seconds
+        async def slow_count(self):
+            import time
+            print("HOLA HOLA HOLA HOLA")
 
         @self.client.event
-        async def on_ready():
-            self.client.loop.create_task(slow_count())
+        async def on_ready(self):
+            self.slow_count.start()
             self.app.run(host="0.0.0.0", port='4030')
 
 
-        async def slow_count():
-            import time
-            print("HOLA HOLA HOLA HOLA")
 
         self.client.run(self.token)
 
