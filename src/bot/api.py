@@ -35,8 +35,8 @@ class BotApi:
             await channel.send('test')
             exit()
         print("Aqui llega!!!!!!!!")
-        client.run(self.token)
-
+        loop = asyncio.get_event_loop()
+        loop.run_until_complete(client.start(self.token))
     def start(self):
         
         print("STARTING!")
