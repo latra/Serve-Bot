@@ -1,6 +1,8 @@
 from flask import Flask, request
 from flask_restful import Resource, Api
 from json import dumps
+from utils.constants import *
+
 from flask import request
 import asyncio
 from discord.ext import commands as discord_commands
@@ -8,6 +10,10 @@ import nest_asyncio
 import logging
 from dotenv import load_dotenv
 import sys, os
+import json
+
+
+lang_string = json.load(open(os.path.join(os.path.dirname(os.path.realpath('__file__')), 'src/bot/strings/ES-es.json')))
         
 class BotApi: 
     def __init__(self):
@@ -29,11 +35,9 @@ class BotApi:
         client = discord_commands.Bot(command_prefix="")
         @client.event
         async def on_ready():
-            print("Aqui sigue!!!!!!!!")
-
-            print("channel: ")
+            message = lang_string[TERRARIA_READY]
             channel = client.get_channel(channel_uid)
-            await channel.send('test')
+            await channel.send(message)
             await client.close()
         print("Aqui llega!!!!!!!!")
         loop = asyncio.get_event_loop()
