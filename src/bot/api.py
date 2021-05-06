@@ -35,6 +35,8 @@ class BotApi:
             await channel.send('test')
             exit()
         print("Aqui llega!!!!!!!!")
+        nest_asyncio.apply()
+        __import__('IPython').embed()
         loop = asyncio.get_event_loop()
         loop.run_until_complete(client.start(self.token))
     def start(self):
