@@ -25,7 +25,7 @@ class DiscordBot:
         self.index = 0
         self.client.remove_command('help')
         logging.info("Reading bot functions")
-        @self.client.command()
+        @commands.command
         async def help(ctx):
             print("hola que ase")
             await HelpCommand.help(ctx)
@@ -35,9 +35,6 @@ class DiscordBot:
         @self.client.command()
         async def stop(ctx):
             pass
-        @self.client.event
-        async def on_message(message):
-            await self.client.process_commands(message)
         @self.client.event
         async def on_command_error(ctx, error):
             value = ''.join(traceback.format_exception(None, error, error.__traceback__))
