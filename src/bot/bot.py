@@ -38,7 +38,6 @@ class DiscordBot:
             pass
         @self.client.event
         async def on_command_error(ctx, error):
-            value = ''.join(traceback.format_exception(None, error, error.__traceback__))
             logging.error(value)
             if isinstance(error, discord_commands.CommandError):
                 from src.modules.commands.utils import CatchedError
