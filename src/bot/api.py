@@ -24,8 +24,6 @@ class BotApi:
     def game_response(self, body_json):
          self.treatment(body_json['server_uid'], body_json['channel_uid'], body_json['game'], body_json['status'], body_json['ip'], body_json['port'])
     def treatment(self, server_uid, channel_uid, game, status, ip, port):
-        loop = asyncio.new_event_loop()
-        asyncio.set_event_loop(loop)
         client = discord_commands.Bot(command_prefix=os.getenv('DISCORD_PREFIX'))
         @client.event
         async def on_ready():
@@ -36,7 +34,7 @@ class BotApi:
             await channel.send('test')
             exit()
         print("Aqui llega!!!!!!!!")
-        client.run(self.token)
+        asyncio.run(client.start(self.token))
     def start(self):
         print("STARTING!")
         self.app.run(host="0.0.0.0", port='4030')
