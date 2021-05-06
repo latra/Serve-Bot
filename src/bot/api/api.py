@@ -13,7 +13,7 @@ class BotApi:
             body_json = request.json
            # channel = self.client.get_channel(body_json['channel_uid'])
             #await channel.send('test')
-            return body_json
+            return 'OK'
 
     def start(self):
         print("STARTING!")
