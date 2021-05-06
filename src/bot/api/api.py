@@ -18,10 +18,10 @@ class BotApi:
 
             return 'OK'
     async def game_response(self, body_json):
-        await self.game_response(body_json['server_uid'], body_json['channel_uid'], body_json['game'], body_json['status'], body_json['ip'], body_json['port'])
-    async def game_response(self, server_uid, channel_uid, game, status, ip, port):
-            channel = self.client.get_channel(channel_uid)
-            await channel.send('test')
+        await self.treatment(body_json['server_uid'], body_json['channel_uid'], body_json['game'], body_json['status'], body_json['ip'], body_json['port'])
+    async def treatment(self, server_uid, channel_uid, game, status, ip, port):
+        channel = self.client.get_channel(channel_uid)
+        await channel.send('test')
     def start(self):
         print("STARTING!")
         self.app.run(host="0.0.0.0", port='4030')
