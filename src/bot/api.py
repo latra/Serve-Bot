@@ -39,7 +39,7 @@ class BotApi:
         @tasks.loop(seconds=5.0, count=5)
         async def slow_count():
             import time
-            time.sleep(100)
+            print("HOLA HOLA HOLA HOLA")
 
         self.client.run(self.token)
 
