@@ -23,7 +23,7 @@ class BotApi:
     async def treatment(self, server_uid, channel_uid, game, status, ip, port):
 
         client = discord_commands.Bot(command_prefix='!serveCall')
-        @self.client.event
+        @client.event
         async def on_ready():
             print("channel: " + channel_uid)
             channel = client.get_channel(channel_uid)
