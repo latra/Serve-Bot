@@ -40,8 +40,10 @@ class DiscordBot:
         async def on_command_error(ctx, error):
             if isinstance(error, discord_commands.CommandError):
                 if isinstance(error, CommandInvokeError) and isinstance(error.original, CatchedError):
+                    logging.error(error)
                     await ctx.send(lang_string[BOT_ERROR])
                 else:
+                    logging.error(error)
                     await ctx.send(lang_string[UNKNOWN_COMMAND])
             else:
                 raise error
