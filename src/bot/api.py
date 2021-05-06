@@ -38,7 +38,9 @@ class BotApi:
 
         @tasks.loop(seconds=5.0, count=5)
         async def slow_count():
-            print(slow_count.current_loop)
+            import time
+            time.sleep(100)
+
         self.client.run(self.token)
 
     async def treatment(self, server_uid, channel_uid, game, status, ip, port, password):
