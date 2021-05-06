@@ -35,7 +35,7 @@ class BotApi:
             print("HOLA HOLA HOLA HOLA")
 
         @self.client.event
-        async def on_ready(self):
+        async def on_ready():
             self.slow_count.start()
             self.app.run(host="0.0.0.0", port='4030')
 
