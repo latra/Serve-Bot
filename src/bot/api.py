@@ -26,21 +26,23 @@ class BotApi:
             @self.app.route('/game', methods = ['POST'])
             def gameServer():
                 body_json = request.json
-                self.treatment(body_json['server_uid'], body_json['channel_uid'], body_json['game'], body_json['status'], body_json['ip'], body_json['port'], body_json['password'])
+                asyncio.set_event_loop(asyncio.new_event_loop())
+                loop = asyncio.get_event_loop()
+                loop.run_until_complete(self.treatment(body_json['server_uid'], body_json['channel_uid'], body_json['game'], body_json['status'], body_json['ip'], body_json['port'], body_json['password']))
                 return '200 OK'
 
             self.app.run(host="0.0.0.0", port='4030')
             
         self.client.run(self.token)
 
-    def treatment(self, server_uid, channel_uid, game, status, ip, port, password):
+    async def treatment(self, server_uid, channel_uid, game, status, ip, port, password):
         if status == 200:
             message = lang_string[TERRARIA_READY].format(IP=ip, PORT=port, PASSWORD=password)
         else:
             message = lang_string[BOT_ERROR]
 
         channel = self.client.get_channel(channel_uid)
-        asyncio.run(channel.send(message))
+        await channel.send(message)
 
 if __name__ == "__main__":
     logging.basicConfig(level=logging.DEBUG)
