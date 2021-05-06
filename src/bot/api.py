@@ -6,6 +6,7 @@ import asyncio
 from discord.ext import commands as discord_commands
 import nest_asyncio
 import logging
+from dotenv import load_dotenv
 import sys
         
 class BotApi: 
