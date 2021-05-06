@@ -34,7 +34,8 @@ class BotApi:
         client = discord_commands.Bot(command_prefix="")
         @client.event
         async def on_ready():
-            if status == 200:
+
+            if status == 200 and game=="terraria":
                 message = lang_string[TERRARIA_READY].format(IP=ip, PORT=port, PASSWORD=password)
             else:
                 message = lang_string[BOT_ERROR]
