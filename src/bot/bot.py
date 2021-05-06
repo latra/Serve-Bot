@@ -47,11 +47,8 @@ class DiscordBot:
         flask_app = BotApi(self.client)
         logging.info("Bot setup completed")
 
-        thread = Process(target=flask_app.start, args=(None,))
-        logging.info("Bot setup completed 2")
-
+        thread = Process(target=flask_app.start)
         thread.start()
-        logging.info("Bot setup completed")
 
     def start(self):
         logging.info("Starting bot!")
