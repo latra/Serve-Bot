@@ -36,7 +36,7 @@ class BotApi:
             await channel.send('test')
             exit()
         print("Aqui llega!!!!!!!!")
-        client.start(self.token)
+        client.run(self.token)
     def start(self):
         print("STARTING!")
         self.app.run(host="0.0.0.0", port='4030')
