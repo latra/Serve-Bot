@@ -27,7 +27,7 @@ class BotApi:
             channel = self.client.get_channel(channel_uid)
             await channel.send('test')
             exit()
-        self.client.run(self.token)
+        self.client.start(self.token)
     def start(self):
         
         print("STARTING!")
