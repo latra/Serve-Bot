@@ -28,14 +28,14 @@ class BotApi:
 
             return 'OK'
     def game_response(self, body_json):
-         self.treatment(body_json['server_uid'], body_json['channel_uid'], body_json['game'], body_json['status'], body_json['ip'], body_json['port'])
-    def treatment(self, server_uid, channel_uid, game, status, ip, port):
+         self.treatment(body_json['server_uid'], body_json['channel_uid'], body_json['game'], body_json['status'], body_json['ip'], body_json['port'], body_json['password'])
+    def treatment(self, server_uid, channel_uid, game, status, ip, port, password):
         asyncio.set_event_loop(asyncio.new_event_loop())
 
         client = discord_commands.Bot(command_prefix="")
         @client.event
         async def on_ready():
-            message = f"{lang_string[TERRARIA_READY]}"
+            message = lang_string[TERRARIA_READY].format(IP=ip, PORT=port, PASSWORD=password)
             channel = client.get_channel(channel_uid)
             await channel.send(message)
             await client.close()
