@@ -26,7 +26,7 @@ class DiscordBot:
         self.client.remove_command('help')
         logging.info("Reading bot functions")
 
-        @chain_command(" help", pass_context=True)
+        @commands.command(aliases=[' help'])
         async def help(ctx):
             await HelpCommand.help(ctx)
             
