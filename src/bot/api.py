@@ -17,20 +17,19 @@ lang_string = json.load(open(os.path.join(os.path.dirname(os.path.realpath('__fi
         
 class BotApi: 
     def __init__(self):
+        loop = asyncio.get_event_loop()
+
+        self.app = Flask(__name__)
+        self.api = Api(self.app)
+        @self.app.route('/game', methods = ['POST'])
+        def gameServer():
+            body_json = request.json
+            loop.run_until_complete(self.treatment(body_json['server_uid'], body_json['channel_uid'], body_json['game'], body_json['status'], body_json['ip'], body_json['port'], body_json['password']))
+            return '200 OK'
         self.client = discord_commands.Bot(command_prefix="")
         self.token = os.getenv('DISCORD_TOKEN')
         @self.client.event
         async def on_ready():
-            loop = asyncio.get_event_loop()
-
-            self.app = Flask(__name__)
-            self.api = Api(self.app)
-            @self.app.route('/game', methods = ['POST'])
-            def gameServer():
-                body_json = request.json
-                loop.run_until_complete(self.treatment(body_json['server_uid'], body_json['channel_uid'], body_json['game'], body_json['status'], body_json['ip'], body_json['port'], body_json['password']))
-                return '200 OK'
-
             self.app.run(host="0.0.0.0", port='4030')
             
         self.client.run(self.token)
