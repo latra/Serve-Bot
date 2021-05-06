@@ -20,7 +20,7 @@ class DiscordBot:
 
         intents = discord.Intents.all()
 
-        self.client = discord_commands.Bot(command_prefix='!')
+        self.client = discord_commands.Bot(command_prefix=os.getenv('DISCORD_PREFIX'))
         self.token = os.getenv('DISCORD_TOKEN')
         self.index = 0
         self.client.remove_command('help')
