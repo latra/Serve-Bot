@@ -26,14 +26,23 @@ class DiscordBot:
         self.client.remove_command('help')
         logging.info("Reading bot functions")
 
-        @discord_commands.command(aliases=[' help'])
+        @self.client.command()
         async def help(ctx):
             await HelpCommand.help(ctx)
             
         @self.client.command()
+        async def serve(ctx):
+            message_words = ctx.message.split(' ')
+            if len(message_words) > 1:
+                if message_words[1] == 'terraria':
+                    await ServeCommand.terraria(ctx)
+            else:
+                await ctx.send(lang_string[UNKNOWN_COMMAND])
+
+        @self.client.command()
         async def terraria(ctx):
             await ServeCommand.terraria(ctx)
-
+            
         @self.client.command()
         async def stop(ctx):
             pass
