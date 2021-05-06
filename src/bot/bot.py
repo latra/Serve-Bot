@@ -39,8 +39,6 @@ class DiscordBot:
         @self.client.event
         async def on_command_error(ctx, error):
             if isinstance(error, discord_commands.CommandError):
-                from src.modules.commands.utils import CatchedError
-                logging.error(error)
                 if isinstance(error, CommandInvokeError) and isinstance(error.original, CatchedError):
                     await ctx.send(lang_string[BOT_ERROR])
                 else:
