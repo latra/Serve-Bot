@@ -17,7 +17,7 @@ class BotApi:
         @self.app.route('/game', methods = ['POST'])
         def gameServer():
             body_json = request.json
-            asyncio.run(self.game_response(body_json))
+            self.game_response(body_json)
             print(request)
 
             return 'OK'
@@ -38,7 +38,6 @@ class BotApi:
         print("Aqui llega!!!!!!!!")
         client.start(self.token)
     def start(self):
-        
         print("STARTING!")
         self.app.run(host="0.0.0.0", port='4030')
 
