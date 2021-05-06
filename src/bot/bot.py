@@ -1,6 +1,5 @@
 from dotenv import load_dotenv
 from utils.constants import *
-from api.api import BotApi
 import logging
 import sys, os
 import json
