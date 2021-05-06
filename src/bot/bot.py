@@ -26,16 +26,18 @@ class DiscordBot:
         self.client.remove_command('help')
         logging.info("Reading bot functions")
 
-        @self.client.command()
+        @chain_command(" help", pass_context=True)
         async def help(ctx):
-            print("hola que ase")
             await HelpCommand.help(ctx)
+            
         @self.client.command()
         async def terraria(ctx):
             await ServeCommand.terraria(ctx)
+
         @self.client.command()
         async def stop(ctx):
             pass
+
         @self.client.event
         async def on_command_error(ctx, error):
             if isinstance(error, discord_commands.CommandError):
@@ -51,6 +53,7 @@ class DiscordBot:
     def start(self):
         logging.info("Starting bot!")
         self.client.run(self.token)
+
 if __name__ == "__main__":
     logging.basicConfig(level=logging.DEBUG)
     logging.debug("Reading env configuration")
