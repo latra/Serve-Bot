@@ -25,12 +25,14 @@ class BotApi:
         client = discord_commands.Bot(command_prefix='!serveCall')
         @client.event
         async def on_ready():
+            print("Aqui sigue!!!!!!!!")
+
             print("channel: " + channel_uid)
             channel = client.get_channel(channel_uid)
             await channel.send('test')
             exit()
-        nest_asyncio.apply()
         loop = asyncio.get_event_loop()
+        print("Aqui llega!!!!!!!!")
         loop.run_until_complete(client.start(self.token))
 
     def start(self):
