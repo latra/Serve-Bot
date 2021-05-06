@@ -25,8 +25,7 @@ class BotApi:
             body_json = request.json
             self.game_response(body_json)
             print(request)
-
-            return 'OK'
+            return '200 OK'
     def game_response(self, body_json):
          self.treatment(body_json['server_uid'], body_json['channel_uid'], body_json['game'], body_json['status'], body_json['ip'], body_json['port'], body_json['password'])
     def treatment(self, server_uid, channel_uid, game, status, ip, port, password):
@@ -35,17 +34,19 @@ class BotApi:
         client = discord_commands.Bot(command_prefix="")
         @client.event
         async def on_ready():
-            message = lang_string[TERRARIA_READY].format(IP=ip, PORT=port, PASSWORD=password)
+            if status == 200:
+                message = lang_string[TERRARIA_READY].format(IP=ip, PORT=port, PASSWORD=password)
+            else:
+                message = lang_string[BOT_ERROR]
+
             channel = client.get_channel(channel_uid)
             await channel.send(message)
             await client.close()
-        print("Aqui llega!!!!!!!!")
         loop = asyncio.get_event_loop()
         loop.run_until_complete(client.start(self.token))
 
 
     def start(self):
-        print("STARTING!")
         self.app.run(host="0.0.0.0", port='4030')
 
 if __name__ == "__main__":
