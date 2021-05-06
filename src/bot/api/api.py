@@ -13,7 +13,7 @@ class BotApi:
             body_json = request.json
             channel = self.client.get_channel(body_json['channel_uid'])
             await channel.send('test')
-            return { "data": [ { "name": "my name", age: "27" } ] }
+            return { "data": [ { "name": "my name", "age": "27" } ] }
 
     def start(self):
         print("STARTING!")
