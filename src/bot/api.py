@@ -36,7 +36,6 @@ class BotApi:
             self.app.run(host="0.0.0.0", port='4030')
 
 
-        @tasks.loop(seconds=5.0, count=5)
         async def slow_count():
             import time
             print("HOLA HOLA HOLA HOLA")
