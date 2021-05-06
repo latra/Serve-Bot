@@ -44,7 +44,7 @@ class DiscordBot:
                     await ctx.send(lang_string[UNKNOWN_COMMAND])
             else:
                 raise error
-        flask_app = BotApi(self.client, self.token)
+        flask_app = BotApi(self.token)
         logging.info("Bot setup completed")
 
         thread = Process(target=flask_app.start)
