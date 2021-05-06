@@ -32,7 +32,7 @@ class DiscordBot:
             
         @self.client.command()
         async def serve(ctx):
-            message_words = ctx.message.split(' ')
+            message_words = ctx.message.content.split(' ')
             if len(message_words) > 1:
                 if message_words[1] == 'terraria':
                     await ServeCommand.terraria(ctx)
@@ -50,7 +50,7 @@ class DiscordBot:
         @self.client.event
         async def on_command_error(ctx, error):
             if isinstance(error, discord_commands.CommandError):
-                if isinstance(error, CommandInvokeError) and isinstance(error.original, CatchedError):
+                if isinstance(error, CommandInvokeError):
                     logging.error(error)
                     await ctx.send(lang_string[BOT_ERROR])
                 else:
