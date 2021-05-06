@@ -25,6 +25,7 @@ class DiscordBot:
         logging.info("Reading bot functions")
         @self.client.command()
         async def help(ctx):
+            print("hola que ase")
             await HelpCommand.help(ctx)
         @self.client.command()
         async def terraria(ctx):
