@@ -11,9 +11,9 @@ class BotApi:
         @self.app.route('/game', methods = ['POST'])
         async def gameServer():
             body_json = request.json
-            channel = self.client.get_channel(body_json['channel_uid'])
-            await channel.send('test')
-            return { "data": [ { "name": "my name", "age": "27" } ] }
+           # channel = self.client.get_channel(body_json['channel_uid'])
+            #await channel.send('test')
+            return body_json
 
     def start(self):
         print("STARTING!")
