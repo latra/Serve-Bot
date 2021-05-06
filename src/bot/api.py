@@ -35,7 +35,7 @@ class BotApi:
         client = discord_commands.Bot(command_prefix="")
         @client.event
         async def on_ready():
-            message = lang_string[TERRARIA_READY]
+            message = f"{lang_string[TERRARIA_READY]}"
             channel = client.get_channel(channel_uid)
             await channel.send(message)
             await client.close()
