@@ -15,7 +15,7 @@ class DiscordBot:
         lang_string = json.load(open(os.path.join(os.path.dirname(os.path.realpath('__file__')), 'src/bot/strings/ES-es.json')))
         logging.info("Reading bot config data")
 
-        self.client = discord_commands.Bot(prefix(os.getenv('DISCORD_PREFIX'), guild_subscriptions=True, intents=intents, self_bot=False)
+        self.client = discord_commands.Bot(prefix=os.getenv('DISCORD_PREFIX'), guild_subscriptions=True, intents=intents, self_bot=False)
         self.token = os.getenv('DISCORD_TOKEN')
         self.index = 0
         self.client.remove_command('help')
