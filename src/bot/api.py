@@ -11,7 +11,7 @@ import logging
 from dotenv import load_dotenv
 import sys, os
 import json
-
+from discord.ext import tasks
 
 lang_string = json.load(open(os.path.join(os.path.dirname(os.path.realpath('__file__')), 'src/bot/strings/ES-es.json')))
         
@@ -28,10 +28,17 @@ class BotApi:
             return '200 OK'
         self.client = discord_commands.Bot(command_prefix="")
         self.token = os.getenv('DISCORD_TOKEN')
+
+        
         @self.client.event
         async def on_ready():
+            slow_count().start()
             self.app.run(host="0.0.0.0", port='4030')
-            
+
+
+        @tasks.loop(seconds=5.0, count=5)
+        async def slow_count():
+            print(slow_count.current_loop)
         self.client.run(self.token)
 
     async def treatment(self, server_uid, channel_uid, game, status, ip, port, password):
