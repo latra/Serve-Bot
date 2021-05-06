@@ -24,6 +24,8 @@ class BotApi:
         @self.app.route('/game', methods = ['POST'])
         def gameServer():
             body_json = request.json
+            nest_asyncio.apply()
+
             loop.run_until_complete(self.treatment(body_json['server_uid'], body_json['channel_uid'], body_json['game'], body_json['status'], body_json['ip'], body_json['port'], body_json['password']))
             return '200 OK'
         self.client = discord_commands.Bot(command_prefix="")
