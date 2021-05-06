@@ -22,7 +22,7 @@ class BotApi:
         await self.treatment(body_json['server_uid'], body_json['channel_uid'], body_json['game'], body_json['status'], body_json['ip'], body_json['port'])
     async def treatment(self, server_uid, channel_uid, game, status, ip, port):
 
-        client = discord_commands.Bot()
+        client = discord_commands.Bot(command_prefix='!serveCall')
         @self.client.event
         async def on_ready():
             print("channel: " + channel_uid)
