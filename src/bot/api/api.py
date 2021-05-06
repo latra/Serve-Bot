@@ -9,7 +9,7 @@ class BotApi:
         self.app = Flask(__name__)
         self.api = Api(self.app)
         @self.app.route('/game', methods = ['POST'])
-        async def gameServer(self):
+        async def gameServer():
             body_json = request.json
             channel = self.client.get_channel(body_json['channel_uid'])
             await channel.send('test')
