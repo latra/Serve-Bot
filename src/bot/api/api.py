@@ -4,7 +4,7 @@ from json import dumps
 from flask import request
 import asyncio
 from discord.ext import commands as discord_commands
-
+import nest_asyncio
         
 class BotApi: 
     def __init__(self, token):
@@ -29,6 +29,7 @@ class BotApi:
             channel = client.get_channel(channel_uid)
             await channel.send('test')
             exit()
+        nest_asyncio.apply()
         loop = asyncio.get_event_loop()
         loop.run_until_complete(client.start(self.token))
 
