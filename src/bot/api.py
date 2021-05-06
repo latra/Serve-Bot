@@ -9,27 +9,39 @@ from discord.ext import commands as discord_commands
 import nest_asyncio
 import logging
 from dotenv import load_dotenv
-import sys, os
+import sys, os, threading
 import json
 from discord.ext import tasks
 
 lang_string = json.load(open(os.path.join(os.path.dirname(os.path.realpath('__file__')), 'src/bot/strings/ES-es.json')))
         
 class BotApi: 
-    @tasks.loop(seconds=60) # task runs every 60 seconds
+    @tasks.loop(seconds=1) # task runs every 60 seconds
     async def slow_count(self):
         import time
+        answer = None
+        self.lock.acquire()
+        if len(self.answers) > 0:
+            answer = self.answers.pop()
+        self.lock.release()
+        if answer:
+            await self.treatment(answer['server_uid'], answer['channel_uid'], answer['game'], answer['status'], answer['ip'], answer['port'], answer['password'])
+        
         print("HOLA HOLA HOLA HOLA")
     def __init__(self):
-
+        self.lock = threading.Lock()
+        self.answers = []
         self.app = Flask(__name__)
         self.api = Api(self.app)
         @self.app.route('/game', methods = ['POST'])
         def gameServer():
             body_json = request.json
-            loop = asyncio.get_event_loop()
-            loop.run_until_complete(self.treatment(body_json['server_uid'], body_json['channel_uid'], body_json['game'], body_json['status'], body_json['ip'], body_json['port'], body_json['password']))
+
+            self.lock.acquire()
+            self.answers.append(body_json)
+            self.lock.acquire()
             return '200 OK'
+
         self.client = discord_commands.Bot(command_prefix="")
         self.token = os.getenv('DISCORD_TOKEN')
 
