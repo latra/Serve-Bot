@@ -51,7 +51,6 @@ class DiscordBot:
                     await ctx.send(lang_string[UNKNOWN_COMMAND])
             else:
                 raise error
-        self.client.add_command(help)
 
     def start(self):
         logging.info("Starting bot!")
