@@ -21,13 +21,13 @@ class BotApi:
         self.token = os.getenv('DISCORD_TOKEN')
         @self.client.event
         async def on_ready():
+            loop = asyncio.get_event_loop()
+
             self.app = Flask(__name__)
             self.api = Api(self.app)
             @self.app.route('/game', methods = ['POST'])
             def gameServer():
                 body_json = request.json
-                asyncio.set_event_loop(asyncio.new_event_loop())
-                loop = asyncio.get_event_loop()
                 loop.run_until_complete(self.treatment(body_json['server_uid'], body_json['channel_uid'], body_json['game'], body_json['status'], body_json['ip'], body_json['port'], body_json['password']))
                 return '200 OK'
 
