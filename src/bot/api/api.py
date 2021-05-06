@@ -6,10 +6,11 @@ import asyncio
 
         
 class BotApi: 
-    def __init__(self, client):
+    def __init__(self, client, token):
         self.client = client
         self.app = Flask(__name__)
         self.api = Api(self.app)
+        self.token = token
         @self.app.route('/game', methods = ['POST'])
         def gameServer():
             body_json = request.json
@@ -26,6 +27,7 @@ class BotApi:
             channel = self.client.get_channel(channel_uid)
             await channel.send('test')
             exit()
+        self.client.run(self.token)
     def start(self):
         
         print("STARTING!")
