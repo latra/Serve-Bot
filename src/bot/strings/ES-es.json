@@ -4,7 +4,7 @@
     "HELP":"**!serve terraria** para iniciar servidor de terraria",
     "TERRARIA_ASKED": "Leído, deja que pregunte a mi colega el server...",
     "TERRARIA_TRUE": "Returned 200... Lo que significa que está en ello... Danos un momento y cuando esté funcionando te aviso.",
-    "TERRARIA_READY": "Servidor de terraria listo!\nIP: {IP}\nPuerto: {PORT}\nContraseña:{PASSWORD}",
+    "TERRARIA_READY": "Servidor de terraria listo!\nIP: {IP}\nPuerto: {PORT}\nContraseña: {PASSWORD}",
     "TERRARIA_STOP": "Oído cocina, servidor down en 3...",
     "TERRARIA_ERROR_FORBBIDEN": "Eh... Quizás me estoy liando, pero tu servidor no sale en la lista de permitidos",
     "TERRARIA_ERROR_RUNNING": "Vale, no te quiero destrozar la ilusión, pero me temo que ya tienes un servidor de Terraria funcionando.\nIP: {IP}\nPuerto: {PORT}\nContraseña:{PASSWORD}",
