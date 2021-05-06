@@ -22,7 +22,7 @@ class BotApi:
 
             return 'OK'
     def game_response(self, body_json):
-        await self.treatment(body_json['server_uid'], body_json['channel_uid'], body_json['game'], body_json['status'], body_json['ip'], body_json['port'])
+         self.treatment(body_json['server_uid'], body_json['channel_uid'], body_json['game'], body_json['status'], body_json['ip'], body_json['port'])
     def treatment(self, server_uid, channel_uid, game, status, ip, port):
 
         client = discord_commands.Bot(command_prefix=os.getenv('DISCORD_PREFIX'))
