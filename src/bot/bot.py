@@ -13,7 +13,10 @@ import commands.serve as ServeCommand
 class DiscordBot:
     def __init__(self):
         lang_string = json.load(open(os.path.join(os.path.dirname(os.path.realpath('__file__')), 'src/bot/strings/ES-es.json')))
+        logging.info(os.getenv('DISCORD_PREFIX'))
+        
         logging.info("Reading bot config data")
+
 
         self.client = discord_commands.Bot(command_prefix=os.getenv('DISCORD_PREFIX'), guild_subscriptions=True, self_bot=False)
         self.token = os.getenv('DISCORD_TOKEN')
