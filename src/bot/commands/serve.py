@@ -12,7 +12,7 @@ class ServeCommand:
         self.bot_ip = os.getenv("BOT_API")
         self.api_token = os.getenv("API_TOKEN")
     async def terraria(ctx):
-        await ctx.send(lang_string[TERRARIA_ASKED])
+        await ctx.send(self.lang_string[TERRARIA_ASKED])
         logging.info(f"Enviando petición a {url}")
         self.game = "terraria"
         request_body = {
