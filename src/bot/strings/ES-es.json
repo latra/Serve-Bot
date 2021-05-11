@@ -2,6 +2,7 @@
     "BOT_JOINED": "¡Aquí Serboti a tu servicio!",
     "UNKNOWN_COMMAND": "Esto te lo estás inventando... Usa p!help para que te explique como va la cosa.",
     "HELP":"**p!serve terraria** para iniciar servidor de terraria",
+    "SERVER_COMUNICATION_ERROR": "Pues no va el server y me ha dejado en visto. Vuelve a intentarlo más tarde.",
     "TERRARIA_ASKED": "Leído, deja que pregunte a mi colega el server...",
     "TERRARIA_TRUE": "Returned 200... Lo que significa que está en ello... Danos un momento y cuando esté funcionando te aviso.",
     "TERRARIA_READY": "Servidor de terraria listo!\nIP: {IP}\nPuerto: {PORT}\nContraseña: {PASSWORD}",
