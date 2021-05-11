@@ -5,7 +5,7 @@ import json
 import logging
 from requests.exceptions import HTTPError
 from requests.exceptions import RequestException
-class ServeCommand:
+class StopCommand:
     def __init__(self):
         self.lang_string = json.load(open(os.path.join(os.path.dirname(os.path.realpath('__file__')), 'src/bot/strings/ES-es.json')))
         self.url = os.getenv("SERVER_URL")
