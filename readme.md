@@ -33,3 +33,9 @@ STATUS>
     200 -> OK, SERVER STARTED
     403 -> SERVER WITHOUT PERMISSION
     440 -> SERVER ALREADY RUNNING/STOPPED 
+
+----
+## SERVER DATABASE
+'ID': 
+    games: {'game':'permission'},
+    running: {'game':'isrunning'}
