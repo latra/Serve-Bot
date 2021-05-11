@@ -4,7 +4,7 @@ import requests
 import json
 import logging
 from requests.exceptions import HTTPError
-
+from requests.exceptions import RequestException
 class ServeCommand:
     def __init__(self):
         self.lang_string = json.load(open(os.path.join(os.path.dirname(os.path.realpath('__file__')), 'src/bot/strings/ES-es.json')))
@@ -31,5 +31,5 @@ class ServeCommand:
                 await ctx.send(self.lang_string[TERRARIA_ERROR_FORBBIDEN])
             elif x.status_code == 440:
                 await ctx.send(self.lang_string[TERRARIA_ERROR_RUNNING])
-        except (HTTPError, ConnectionError):
+        except (HTTPError, RequestException):
             await ctx.send(self.lang_string[SERVER_COMUNICATION_ERROR])
