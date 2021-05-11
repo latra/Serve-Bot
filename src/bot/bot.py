@@ -10,7 +10,7 @@ from discord.ext import commands as discord_commands
 from discord.ext.commands import CommandInvokeError
 
 import commands.help as HelpCommand
-import commands.serve as ServeCommand 
+from commands.serve import ServeCommand
 import commands.stop as StopCommand 
 class DiscordBot:
     def __init__(self):
