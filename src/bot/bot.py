@@ -11,6 +11,7 @@ from discord.ext.commands import CommandInvokeError
 
 import commands.help as HelpCommand
 import commands.serve as ServeCommand 
+import commands.stop as StopCommand 
 class DiscordBot:
     def __init__(self):
         lang_string = json.load(open(os.path.join(os.path.dirname(os.path.realpath('__file__')), 'src/bot/strings/ES-es.json')))
@@ -45,8 +46,12 @@ class DiscordBot:
             
         @self.client.command()
         async def stop(ctx):
-            pass
-
+            message_words = ctx.message.content.split(' ')
+            if len(message_words) > 1:
+                if message_words[1] == 'terraria':
+                    await StopCommand.terraria(ctx)
+            else:
+                await ctx.send(lang_string[UNKNOWN_COMMAND])
         @self.client.event
         async def on_command_error(ctx, error):
             if isinstance(error, discord_commands.CommandError):
