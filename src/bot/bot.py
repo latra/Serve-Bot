@@ -11,7 +11,7 @@ from discord.ext.commands import CommandInvokeError
 
 import commands.help as HelpCommand
 from commands.serve import ServeCommand
-import commands.stop as StopCommand 
+from commands.stop import StopCommand
 class DiscordBot:
     def __init__(self):
         lang_string = json.load(open(os.path.join(os.path.dirname(os.path.realpath('__file__')), 'src/bot/strings/ES-es.json')))
