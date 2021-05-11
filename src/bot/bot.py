@@ -48,7 +48,7 @@ class DiscordBot:
             message_words = ctx.message.content.split(' ')
             if len(message_words) > 1:
                 if message_words[1] == 'terraria':
-                    await StopCommand.terraria(ctx)
+                    await StopCommand().terraria(ctx)
             else:
                 await ctx.send(lang_string[UNKNOWN_COMMAND])
         @self.client.event
