@@ -2,6 +2,7 @@ from utils.constants import *
 import os
 import requests
 import json
+import logging
 
 lang_string = json.load(open(os.path.join(os.path.dirname(os.path.realpath('__file__')), 'src/bot/strings/ES-es.json')))
 url = os.getenv("SERVER_URL")
@@ -9,6 +10,7 @@ game = ""
 bot_ip = os.getenv("BOT_API")
 async def terraria(ctx):
     await ctx.send(lang_string[TERRARIA_ASKED])
+    logging.info(f"Enviando petición a {url}")
     game = "terraria"
     request_body = {
         'server_uid':ctx.guild.id,
