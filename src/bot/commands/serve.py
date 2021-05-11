@@ -31,5 +31,5 @@ class ServeCommand:
                 await ctx.send(self.lang_string[TERRARIA_ERROR_FORBBIDEN])
             elif x.status_code == 440:
                 await ctx.send(self.lang_string[TERRARIA_ERROR_RUNNING])
-        except Exception as ex:
+        except HTTPError as ex:
             await ctx.send(self.lang_string[SERVER_COMUNICATION_ERROR])
