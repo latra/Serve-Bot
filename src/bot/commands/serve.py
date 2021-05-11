@@ -17,11 +17,10 @@ class ServeCommand:
         self.game = "terraria"
         request_body = {
             'server_uid':ctx.guild.id,
-            'game':game,
+            'game': self.game,
             'action':'serve',
-            'callback_url': bot_ip,
-            'channel_uid': ctx.channel.id,
-            'callbackurl': url}
+            'callback_url': self.bot_ip,
+            'channel_uid': ctx.channel.id}
 
         try:
             x = requests.post(self.url, data = request_body, headers= {'token':self.api_token})

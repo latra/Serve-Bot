@@ -42,8 +42,7 @@ class DiscordBot:
 
         @self.client.command()
         async def terraria(ctx):
-            await ServeCommand.terraria(ctx)
-            
+            await ServeCommand().terraria(ctx)            
         @self.client.command()
         async def stop(ctx):
             message_words = ctx.message.content.split(' ')
